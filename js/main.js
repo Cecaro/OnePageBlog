@@ -42,10 +42,7 @@
 		lockScroll = false, xscroll, yscroll,
 		isAnimating = false,
 		menuCtrl = document.getElementById('menu-toggle'),
-		menuCloseCtrl = sidebarEl.querySelector('.close-button'),
-		filterControls = [].slice.call($('.filter > button')),
-		currentFilter = '*',
-		filterBar = document.getElementById('theFilter');
+		menuCloseCtrl = sidebarEl.querySelector('.close-button');
 
 	/**
 	 * gets the viewport width and height
@@ -85,9 +82,6 @@
 				// simulate loading time..
 				classie.add(item, 'grid__item--loading');
 				setTimeout(function() {
-					classie.add(filterBar, 'hide-filter');
-					classie.remove(filterBar, 'show-filter');
-					//hide filter bar first
 					classie.add(item, 'grid__item--animate');
 					// reveal/load content after the last element animates out (todo: wait for the last transition to finish)
 					setTimeout(function() { loadContent(item); }, 500);
@@ -96,7 +90,6 @@
 		});
 
 		closeCtrl.addEventListener('click', function() {
-			// toggle filter bar
 			// hide content
 			hideContent();
 		});
@@ -114,27 +107,17 @@
 			}
 		} );
 
-		// // hamburger menu button (mobile) and close cross
-		// menuCtrl.addEventListener('click', function() {
-		// 	if( !classie.has(sidebarEl, 'sidebar--open') ) {
-		// 		classie.add(sidebarEl, 'sidebar--open');	
-		// 	}
-		// });
+		// hamburger menu button (mobile) and close cross
+		menuCtrl.addEventListener('click', function() {
+			if( !classie.has(sidebarEl, 'sidebar--open') ) {
+				classie.add(sidebarEl, 'sidebar--open');	
+			}
+		});
 
-		// menuCloseCtrl.addEventListener('click', function() {
-		// 	if( classie.has(sidebarEl, 'sidebar--open') ) {
-		// 		classie.remove(sidebarEl, 'sidebar--open');
-		// 	}
-		// });
-
-		filterControls.forEach(function(filterControl){
-			filterControl.addEventListener('click', function(){
-				classie.remove(filterControl.parentNode.querySelector('.is-checked'), 'is-checked');
-				classie.add(filterControl, 'is-checked');
-
-				currentFilter = $(filterControl).attr('data-filter');
-				filterItems(currentFilter);
-			});
+		menuCloseCtrl.addEventListener('click', function() {
+			if( classie.has(sidebarEl, 'sidebar--open') ) {
+				classie.remove(sidebarEl, 'sidebar--open');
+			}
 		});
 	}
 
@@ -169,7 +152,7 @@
 			classie.remove(dummy, 'placeholder--trans-in');
 			classie.add(dummy, 'placeholder--trans-out');
 			// position the content container
-			contentItemsContainer.style.top = scrollY() - 45 + 'px';
+			contentItemsContainer.style.top = scrollY() + 'px';
 			// show the main content container
 			classie.add(contentItemsContainer, 'content--show');
 			// show content item:
@@ -178,9 +161,6 @@
 			classie.add(closeCtrl, 'close-button--show');
 			// sets overflow hidden to the body and allows the switch to the content scroll
 			classie.addClass(bodyEl, 'noscroll');
-			// sets the filter display to hidden to remove whitespace
-			classie.addClass(filterBar, 'hidden');
-			classie.addClass(gridItemsContainer, 'hidden');
 
 			isAnimating = false;
 		});
@@ -189,13 +169,10 @@
 	function hideContent() {
 		var gridItem = gridItems[current], contentItem = contentItems[current];
 
-		classie.removeClass(gridItemsContainer, 'hidden');
 		classie.remove(contentItem, 'content__item--show');
 		classie.remove(contentItemsContainer, 'content--show');
 		classie.remove(closeCtrl, 'close-button--show');
 		classie.remove(bodyEl, 'view-single');
-		classie.remove(filterBar, 'hide-filter');
-		classie.removeClass(filterBar, 'hidden');
 
 		setTimeout(function() {
 			var dummy = gridItemsContainer.querySelector('.placeholder');
@@ -227,36 +204,6 @@
 			yscroll = scrollY();
 		}
 		window.scrollTo(xscroll, yscroll);
-	}
-
-	function filterItems(filter){
-		var itemsToShow = [];
-		var hiddenItems = [];
-		var gridItemsArray = Array.from(gridItems);
-
-		gridItemsArray.forEach(function(item){
-			if(filter === '*'){
-				itemsToShow.push(item);
-			}
-			else if(classie.has(item, filter)){
-				itemsToShow.push(item);
-			}
-			else {
-				hiddenItems.push(item);
-			}
-		});
-
-		itemsToShow.forEach(function(item){
-			if( classie.has(item, 'hidden') ) {
-				classie.remove(item, 'hidden');
-			}
-		});
-
-		hiddenItems.forEach(function(item){
-			if( !classie.has(item, 'hidden') ) {
-				classie.add(item, 'hidden');
-			}
-		});
 	}
 
 	init();
