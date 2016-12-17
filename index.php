@@ -3,36 +3,44 @@
 <div id="theGrid" class="main">
 	<section class="grid">
   <header class="top-bar">
-      <h2 class="top-bar__headline">Latest articles</h2>
+      <h2 class="top-bar__language "><a class="active" href="">Français</a></h2>
+      <h2 class="top-bar__language "><a href="">English</a></h2>
       <div class="filter">
-        <span>Filter by:</span>
-        <span class="dropdown">Popular</span>
+        <span>Filtre: </span>
+        <span class="dropdown active">Tout</span>
+        <?php 
+          $tags = get_tags();
+          foreach ( $tags as $tag ) {
+            echo ( '<span class="dropdown" data-filter="' . $tag->name . '">' . $tag->name . '</button>' );
+          }  
+        ?>
       </div>
     </header>
 		<?php if (have_posts()) : 
 			while (have_posts()) : 
 				the_post(); ?>
 		<?php $postID = get_the_ID(); ?>
-                <a class="grid__item <?php $postTags = get_the_tags($postID); 
+        <a class="grid__item <?php $postTags = get_the_tags($postID); 
 					foreach ($postTags as $tag) { 
 						echo ("$tag->name "); 
 					} ?>" href="#">
           <h2 class="title title--preview"><?php the_title(); ?></h2>
-            <div class="loader"></div>
-            <span class="category"><?php $postTags = get_the_tags($postID); 
-              $lastTag = end($postTags);
-              foreach ($postTags as $tag) {
-                if($tag === $lastTag){
-                  echo ("$tag->name");
-                } else { 
-                  echo("$tag->name, ");
-                } 
-              } ?>
-            </span>
-            <div class="meta meta--preview">
-              <img class="meta__avatar" src="" alt="" /> 
-              <span class="meta__date"><i class="fa fa-calendar-o"></i><?php $post_date = get_the_date( 'M j' ); echo $post_date; ?></span>
-            </div>
+          <div class="loader"></div>
+          <span class="category"><?php $postTags = get_the_tags($postID); 
+            $lastTag = end($postTags);
+            foreach ($postTags as $tag) {
+              if($tag === $lastTag){
+                echo ("$tag->name");
+              } else { 
+                echo("$tag->name, ");
+              } 
+            } ?>
+          </span>
+          <div class="meta meta--preview">
+            <img class="meta__avatar" src="" alt="" /> 
+            <span class="meta__date"><i class="fa fa-calendar-o"></i><?php $post_date = get_the_date( 'M j' ); echo $post_date; ?></span>
+          </div>
+        </a>
 			<?php endwhile; 
 		else: ?>
 			<p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
