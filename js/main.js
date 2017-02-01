@@ -43,9 +43,9 @@
 		isAnimating = false,
 		menuCtrl = document.getElementById('menu-toggle'),
 		menuCloseCtrl = sidebarEl.querySelector('.close-button'),
-		filterControls = [].slice.call($('.filter > button')),
+		filterControls = [].slice.call($('.filter > .filter-item')),
 		currentFilter = '*',
-		filterBar = document.getElementById('theFilter');
+		filterBar = document.getElementById('filter');
 
 	/**
 	 * gets the viewport width and height
@@ -127,8 +127,8 @@
 
 		filterControls.forEach(function(filterControl){
 			filterControl.addEventListener('click', function(){
-				classie.remove(filterControl.parentNode.querySelector('.is-checked'), 'is-checked');
-				classie.add(filterControl, 'is-checked');
+				classie.remove(filterControl.parentNode.querySelector('.active'), 'active');
+				classie.add(filterControl, 'active');
 				currentFilter = $(filterControl).attr('data-filter');
 				filterItems(currentFilter);
 			});
@@ -243,6 +243,12 @@
 			itemsToShow.forEach(function(item){
 				if (classie.has(item, 'hidden')) {
 					classie.remove(item, 'hidden');
+				}
+			});
+
+			hiddenItems.forEach(function(item){
+				if ( !classie.has(item, 'hidden')){
+					classie.add(item, 'hidden');
 				}
 			});
 	}	

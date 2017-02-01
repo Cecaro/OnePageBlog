@@ -135,17 +135,21 @@ button:focus {
   align-items: center;
 }
 
-.top-bar__language {
+.top-bar__language{
+  display: inherit;
+}
+
+.language-item {
   margin: 0;
   font-size: 0.75em;
   padding-right: 8px;
 }
 
-.top-bar__language > a {
+.language-item > a {
   color: white;
 }
 
-.top-bar__language   > a.active {
+.language-item > a.active {
   color: black;
 }
 
@@ -218,6 +222,13 @@ button:focus {
   color: black;
 }
 
+.filter.hidden {
+  -webkit-transform: translate3d(0, -200%, 0);    
+  transform: translate3d(0, -200%, 0);    
+  -webkit-transition: -webkit-transform 0.3s;   
+  transition: -webkit-transform 0.3s; 
+}
+
 /* Grid item */
 .grid__item {
   padding: 45px 55px 30px;
@@ -238,6 +249,10 @@ button:focus {
   flex-direction: column;
   -webkit-justify-content: center;
   justify-content: center;
+}
+
+.grid__item.hidden {
+  display: none;
 }
 
 /* Grid item "border" */

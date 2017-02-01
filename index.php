@@ -8,7 +8,7 @@
       <h2 class="language-item"><a href="">English</a></h2>
     </div>
       <div class="filter">
-        <span class="filter-item active">Toutes catégories</span>
+        <span class="filter-item active" data-filter="*">Toutes catégories</span>
         <?php 
           $tags = get_tags();
           foreach ( $tags as $tag ) {
