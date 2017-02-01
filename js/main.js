@@ -42,7 +42,10 @@
 		lockScroll = false, xscroll, yscroll,
 		isAnimating = false,
 		menuCtrl = document.getElementById('menu-toggle'),
-		menuCloseCtrl = sidebarEl.querySelector('.close-button');
+		menuCloseCtrl = sidebarEl.querySelector('.close-button'),
+		filterControls = [].slice.call($('.filter > button')),
+		currentFilter = '*',
+		filterBar = document.getElementById('theFilter');
 
 	/**
 	 * gets the viewport width and height
@@ -83,6 +86,8 @@
 				classie.add(item, 'grid__item--loading');
 				setTimeout(function() {
 					classie.add(item, 'grid__item--animate');
+					classie.add(filterBar, 'hide-filter');
+					classie.remove(filterBar, 'show-filter');
 					// reveal/load content after the last element animates out (todo: wait for the last transition to finish)
 					setTimeout(function() { loadContent(item); }, 500);
 				}, 1000);
@@ -118,6 +123,15 @@
 			if( classie.has(sidebarEl, 'sidebar--open') ) {
 				classie.remove(sidebarEl, 'sidebar--open');
 			}
+		});
+
+		filterControls.forEach(function(filterControl){
+			filterControl.addEventListener('click', function(){
+				classie.remove(filterControl.parentNode.querySelector('.is-checked'), 'is-checked');
+				classie.add(filterControl, 'is-checked');
+				currentFilter = $(filterControl).attr('data-filter');
+				filterItems(currentFilter);
+			});
 		});
 	}
 
@@ -161,7 +175,8 @@
 			classie.add(closeCtrl, 'close-button--show');
 			// sets overflow hidden to the body and allows the switch to the content scroll
 			classie.addClass(bodyEl, 'noscroll');
-
+			classie.addClass(filterBar, 'hidden');
+			//classie.addClass(gridItemsContainer, 'hidden');
 			isAnimating = false;
 		});
 	}
@@ -173,6 +188,8 @@
 		classie.remove(contentItemsContainer, 'content--show');
 		classie.remove(closeCtrl, 'close-button--show');
 		classie.remove(bodyEl, 'view-single');
+		classie.remove(filterBar, 'hide-filter');
+		classie.removeClass(filterBar, 'hidden');
 
 		setTimeout(function() {
 			var dummy = gridItemsContainer.querySelector('.placeholder');
@@ -205,6 +222,30 @@
 		}
 		window.scrollTo(xscroll, yscroll);
 	}
+
+	function filterItems(filter){
+		var itemsToShow = [],
+			hiddenItems = [],
+			gridItemsArray = Array.from(gridItems);
+
+			gridItemsArray.forEach(function(item){
+				if(filter === '*'){
+					itemsToShow.push(item);
+				}
+				else if(classie.has(item, filter)){
+					itemsToShow.push(item);
+				}
+				else {
+					hiddenItems.push(item);
+				}
+			});
+
+			itemsToShow.forEach(function(item){
+				if (classie.has(item, 'hidden')) {
+					classie.remove(item, 'hidden');
+				}
+			});
+	}	
 
 	init();
 

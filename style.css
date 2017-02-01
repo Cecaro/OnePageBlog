@@ -142,11 +142,11 @@ button:focus {
 }
 
 .top-bar__language > a {
-  color: black;
+  color: white;
 }
 
 .top-bar__language   > a.active {
-  color: white;
+  color: black;
 }
 
 /* Menu button for toggling the sidebar (appears on small screen) */
@@ -202,24 +202,20 @@ button:focus {
   transform: translateY(7px);
 }
 
-/* Filter/dropdown dummy on the right */
+/* Filter menu on the right */
 .filter {
   text-align: right;
   font-size: 0.75em;
   margin-left: auto;
 }
 
-.dropdown {
-  font-weight: bold;
-  margin-left: 5px;
-  cursor: pointer;
+.filter-item {
   color: white;
+  padding-right: 5px;
 }
 
-.dropdown::after {
-  content: '\25BC';
-  margin-left: 2px;
-  font-size: 80%;
+.filter-item.active {
+  color: black;
 }
 
 /* Grid item */

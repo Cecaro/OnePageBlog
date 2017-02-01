@@ -3,15 +3,16 @@
 <div id="theGrid" class="main">
 	<section class="grid">
   <header class="top-bar">
-      <h2 class="top-bar__language "><a class="active" href="">Français</a></h2>
-      <h2 class="top-bar__language "><a href="">English</a></h2>
+    <div class="top-bar__language">
+      <h2 class="language-item"><a class="active" href="">Français</a></h2>
+      <h2 class="language-item"><a href="">English</a></h2>
+    </div>
       <div class="filter">
-        <span>Filtre: </span>
-        <span class="dropdown active">Tout</span>
+        <span class="filter-item active">Toutes catégories</span>
         <?php 
           $tags = get_tags();
           foreach ( $tags as $tag ) {
-            echo ( '<span class="dropdown" data-filter="' . $tag->name . '">' . $tag->name . '</button>' );
+            echo ( '<span class="filter-item" data-filter="' . $tag->name . '">' . $tag->name . '</span>' );
           }  
         ?>
       </div>
