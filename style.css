@@ -70,6 +70,14 @@ button:focus {
   font-size: 1.3em;
 }
 
+.en.hidden {
+  display: none;
+}
+
+.fr.hidden {
+  display: none;
+}
+
 /* Links */
 .related {
   font-size: 1em;
@@ -214,6 +222,7 @@ button:focus {
 }
 
 .filter-item {
+  cursor: pointer;
   color: white;
   padding-right: 5px;
 }

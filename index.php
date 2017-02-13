@@ -4,11 +4,13 @@
 	<section class="grid">
   <header class="top-bar">
     <div class="top-bar__language">
-      <h2 class="language-item"><a class="active" href="">Français</a></h2>
-      <h2 class="language-item"><a href="">English</a></h2>
+      <ul><?php pll_the_languages();?></ul>
+      <!-- <h2 class="language-item"><a class="active" href="">Français</a></h2>
+      <h2 class="language-item"><a href="">English</a></h2> -->
     </div>
-      <div class="filter">
-        <span class="filter-item active" data-filter="*">Toutes catégories</span>
+      <div class="filter" id="filter">
+        <span class="filter-item active fr" data-filter="*">Toutes catégories</span>
+        <span class="filter-item en" data-filter="*">All Categories</span>
         <?php 
           $tags = get_tags();
           foreach ( $tags as $tag ) {

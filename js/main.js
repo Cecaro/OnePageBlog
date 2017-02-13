@@ -72,6 +72,9 @@
 	}
 
 	function initEvents() {
+
+		changeLanguage();
+
 		[].slice.call(gridItems).forEach(function(item, pos) {
 			// grid item click event
 			item.addEventListener('click', function(ev) {
@@ -251,7 +254,31 @@
 					classie.add(item, 'hidden');
 				}
 			});
-	}	
+	}
+
+	//currently only handles two languages
+	function changeLanguage(){
+		var languageSelected = window.location.href.indexOf("/fr/") > -1? "fr" : "en";
+		var englishContent = document.querySelectorAll('.en');
+		var frenchContent = document.querySelectorAll('.fr');
+
+		if (languageSelected === "en") {
+			englishContent.forEach(function(item){
+				classie.remove(item, 'hidden');
+			});
+			frenchContent.forEach(function(item){
+				classie.add(item, 'hidden');
+			});
+		}
+		else {
+			frenchContent.forEach(function(item){
+				classie.remove(item, 'hidden');
+			});
+			englishContent.forEach(function(item){
+				classie.add(item, 'hidden');
+			});
+		}
+	}
 
 	init();
 
