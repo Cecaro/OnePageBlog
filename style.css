@@ -147,17 +147,23 @@ button:focus {
   display: inherit;
 }
 
-.language-item {
+.list__languages{
+  list-style: none;
+  display: inherit;
   margin: 0;
+  padding: 0;
   font-size: 0.75em;
-  padding-right: 8px;
 }
 
-.language-item > a {
+.list__languages > li {
+  margin-left: 10px;
+}
+
+.list__languages > li > a {
   color: white;
 }
 
-.language-item > a.active {
+.list__languages > li > a.active {
   color: black;
 }
 
@@ -542,6 +548,13 @@ button:focus {
   height: 100vh;
   pointer-events: auto;
   visibility: visible;
+}
+
+.aligncenter {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 /* scroll helper wrap */

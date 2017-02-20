@@ -4,7 +4,7 @@
 	<section class="grid">
   <header class="top-bar">
     <div class="top-bar__language">
-      <ul><?php pll_the_languages();?></ul>
+      <ul class="list__languages"><?php pll_the_languages();?></ul>
       <!-- <h2 class="language-item"><a class="active" href="">Français</a></h2>
       <h2 class="language-item"><a href="">English</a></h2> -->
     </div>
@@ -72,7 +72,7 @@
                 <span class="meta__date"><i class="fa fa-calendar-o"></i><?php $post_date = get_the_date( 'M j' ); echo $post_date; ?></span>
               </div>
               <p><?php the_content() ?></p>
-	            <div class="comment-section"><?php comment_form(); ?>
+              <?php disqus_embed(kidsinthestars); ?>
             </article>
           <?php endwhile; ?>
         <?php endif; ?>
