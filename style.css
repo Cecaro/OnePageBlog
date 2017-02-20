@@ -62,6 +62,10 @@ button:focus {
   font-family: 'Sacramento', cursive;
 }
 
+.sidebar h1 > a {
+  color: white;
+}
+
 .sidebar h1 span {
   display: block;
 }
