@@ -72,7 +72,7 @@
                 <span class="meta__date"><i class="fa fa-calendar-o"></i><?php $post_date = get_the_date( 'M j' ); echo $post_date; ?></span>
               </div>
               <p><?php the_content() ?></p>
-              <?php disqus_embed(kidsinthestars); ?>
+              <a class="comment-show" onclick="loadComments($(this), '<?= $postID ?> <?= $post ->guid ?>', '<?php the_permalink(); ?>');">Show Comments</a>
             </article>
           <?php endwhile; ?>
         <?php endif; ?>

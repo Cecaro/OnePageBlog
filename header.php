@@ -7,6 +7,34 @@
         <title>Kids in the Stars</title>
         <?php wp_head() ?>
         <?php wp_enqueue_scripts(); ?>
+        <script type="text/javascript">
+            function loadComments(source, identifier, url){
+                if(window.DISQUS) {
+                    $('#disqus_thread').remove();
+
+                    $('<div id="disqus_thread"></div>').insertAfter(source);
+                    
+                    DISQUS.reset({
+                        reload: true,
+                        config: function() {
+                            this.page.identifier = url;
+                            this.page.url = url;
+                        }
+                    });
+                }
+                else{
+                    $('<div id="disqus_thread"></div>').insertAfter(source);
+                    disqus_identifier = url;
+                    disqus_url = url;
+
+                    var dsq = document.createElement('script');
+                    dsq.type = 'text/javascript';
+                    dsq.async = true;
+                    dsq.src = 'http://kidsinthestars.disqus.com/embed.js';
+                    $('head').append(dsq);
+                }
+            }
+        </script>
     </head>
     <body>
         <div class="container">
