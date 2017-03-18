@@ -72,7 +72,8 @@
                 <span class="meta__date"><i class="fa fa-calendar-o"></i><?php $post_date = get_the_date( 'M j' ); echo $post_date; ?></span>
               </div>
               <p><?php the_content() ?></p>
-              <a class="comment-show" onclick="loadComments($(this), '<?= $postID ?> <?= $post ->guid ?>', '<?php the_permalink(); ?>');">Show Comments</a>
+              <p class="fr"><a class="comment-show" onclick="loadComments($(this), '<?= $postID ?> <?= $post ->guid ?>', '<?php the_permalink(); ?>');">Montrer les commentaires</a></p>
+              <p class="en"><a class="comment-show" onclick="loadComments($(this), '<?= $postID ?> <?= $post ->guid ?>', '<?php the_permalink(); ?>');">Show Comments</a></p>
             </article>
           <?php endwhile; ?>
         <?php endif; ?>

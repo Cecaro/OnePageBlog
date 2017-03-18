@@ -604,6 +604,15 @@ button:focus {
 }
 
 /* content elements */
+#disqus_thread{
+  max-width: 75%;
+  margin: 0 auto;
+}
+
+.comment-show{
+  cursor: pointer;
+}
+
 .category--full {
   font-size: 1.25em;
   margin-bottom: 20px;
